@@ -50,3 +50,62 @@
   .other-user .message-time {
     color: #9ca3af;
   }
+  /* Add to src/components/Message/Message.css */
+.file-message {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 10px;
+    transition: all 0.3s ease;
+  }
+  
+  .current-user .file-message {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  .other-user .file-message {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .file-message:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
+  
+  .file-icon {
+    font-size: 32px;
+    margin-right: 12px;
+  }
+  
+  .file-details {
+    flex: 1;
+  }
+  
+  .file-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+    word-break: break-word;
+  }
+  
+  .file-preview-image {
+    max-width: 200px;
+    max-height: 150px;
+    border-radius: 8px;
+    margin-top: 8px;
+  }
+  
+  .file-info {
+    display: flex;
+    gap: 10px;
+    font-size: 12px;
+    color: #9ca3af;
+  }
+  
+  .file-type {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 2px 8px;
+    border-radius: 10px;
+  }

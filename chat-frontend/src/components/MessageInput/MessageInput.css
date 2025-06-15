@@ -57,3 +57,43 @@
     width: 24px;
     height: 24px;
   }
+  /* Add to src/components/MessageInput/MessageInput.css */
+.attach-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    margin-right: 5px;
+    color: #4b5563;
+    transition: all 0.3s ease;
+  }
+  
+  .attach-button:hover {
+    color: #4f46e5;
+  }
+  
+  .attach-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .attach-button svg {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
