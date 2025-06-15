@@ -1,0 +1,29 @@
+.message-list {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: #f9fafb;
+    scrollbar-width: thin;
+    scrollbar-color: #d1d5db #f3f4f6;
+  }
+  
+  .message-list::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .message-list::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 4px;
+  }
+  
+  .message-list::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 4px;
+  }
+  
+  .message-list::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+  }

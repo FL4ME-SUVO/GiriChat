@@ -1,0 +1,10 @@
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 800px;
+    height: 90vh;
+    max-height: 800px;
+    overflow: hidden;
+    animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
