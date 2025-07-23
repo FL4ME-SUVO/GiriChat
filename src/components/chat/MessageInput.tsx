@@ -104,20 +104,22 @@ export function MessageInput() {
 
   return (
     <div className="p-4 space-y-3">
-      <div className="flex items-end gap-2">
+      <div className="flex items-end gap-3">
         {/* Attachment Button */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="h-10 w-10 flex-shrink-0"
-          onClick={handleFileUpload}
-        >
-          <Plus className="h-5 w-5" />
-        </Button>
+        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-10 w-10 flex-shrink-0 bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-blue-900 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 rounded-full"
+            onClick={handleFileUpload}
+          >
+            <Plus className="h-5 w-5" />
+          </Button>
+        </motion.div>
 
         {/* Message Input Container */}
         <div className="flex-1 relative">
-          <div className="relative bg-muted rounded-2xl border border-border focus-within:border-primary transition-colors">
+          <div className="relative bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/20 transition-all duration-200 shadow-sm">
             <Textarea
               ref={textareaRef}
               value={message}
@@ -161,16 +163,17 @@ export function MessageInput() {
 
         {/* Send Button */}
         <motion.div
+          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           <Button
             onClick={handleSend}
             disabled={!message.trim()}
             className={cn(
-              "h-10 w-10 rounded-full flex-shrink-0 transition-all",
+              "h-10 w-10 rounded-full flex-shrink-0 transition-all duration-200 shadow-lg",
               message.trim() 
-                ? "bg-primary hover:bg-primary-hover text-primary-foreground" 
-                : "bg-muted text-muted-foreground cursor-not-allowed"
+                ? "bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white hover:shadow-xl" 
+                : "bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed"
             )}
             size="icon"
           >

@@ -47,12 +47,42 @@ export function ChatArea() {
 
   if (!activeChannel) {
     return (
-      <div className="flex items-center justify-center h-full bg-chat-bg">
-        <div className="text-center">
-          <div className="text-4xl mb-4">💬</div>
-          <h2 className="text-xl font-semibold text-foreground mb-2">Welcome to ChatterVerse</h2>
-          <p className="text-muted-foreground">Select a channel to start chatting</p>
-        </div>
+      <div className="flex items-center justify-center h-full relative">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="text-center"
+        >
+          <motion.div
+            animate={{ 
+              rotate: [0, 10, -10, 0],
+              scale: [1, 1.1, 1]
+            }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              repeatDelay: 3
+            }}
+            className="text-6xl mb-6"
+          >
+            💬
+          </motion.div>
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-3">
+            Welcome to GiriChat
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400 text-lg">
+            Select a channel to start your conversation
+          </p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="mt-6 text-sm text-gray-500 dark:text-gray-500"
+          >
+            Connect • Chat • Collaborate
+          </motion.div>
+        </motion.div>
       </div>
     );
   }
@@ -61,36 +91,37 @@ export function ChatArea() {
   const onlineMembers = getOnlineMembers();
 
   return (
-    <div className="flex flex-col h-full bg-chat-bg">
+    <div className="flex flex-col h-full relative">
       {/* Header */}
       <motion.header
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between p-4 border-b border-border bg-card"
+        className="flex items-center justify-between p-4 border-b border-gray-200/30 dark:border-gray-700/30 backdrop-blur-sm bg-white/50 dark:bg-gray-800/50"
       >
         <div className="flex items-center gap-3">
           {activeChannel.type === 'dm' && activeChannel.avatar ? (
-            <Avatar className="h-8 w-8">
+            <Avatar className="h-10 w-10 ring-2 ring-blue-500/20">
               <AvatarImage src={activeChannel.avatar} />
-              <AvatarFallback>
+              <AvatarFallback className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
                 {activeChannel.name.charAt(0)}
               </AvatarFallback>
             </Avatar>
           ) : (
-            <div className="flex items-center justify-center h-8 w-8 rounded-lg bg-primary/10">
-              <Icon className="h-4 w-4 text-primary" />
+            <div className="flex items-center justify-center h-10 w-10 rounded-xl bg-gradient-to-r from-blue-500/20 to-purple-600/20 backdrop-blur-sm border border-blue-500/30">
+              <Icon className="h-5 w-5 text-blue-600 dark:text-blue-400" />
             </div>
           )}
           
           <div>
-            <h1 className="font-semibold text-foreground">{activeChannel.name}</h1>
+            <h1 className="font-bold text-lg text-gray-900 dark:text-gray-100">{activeChannel.name}</h1>
             {activeChannel.description && (
-              <p className="text-sm text-muted-foreground">{activeChannel.description}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{activeChannel.description}</p>
             )}
             {onlineMembers.length > 0 && (
-              <p className="text-xs text-muted-foreground">
+              <div className="flex items-center gap-1 text-xs text-green-600 dark:text-green-400">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
                 {onlineMembers.length} member{onlineMembers.length !== 1 ? 's' : ''} online
-              </p>
+              </div>
             )}
           </div>
         </div>
@@ -137,7 +168,7 @@ export function ChatArea() {
       </div>
 
       {/* Message Input */}
-      <div className="border-t border-border bg-card">
+      <div className="border-t border-gray-200/30 dark:border-gray-700/30 backdrop-blur-sm bg-white/50 dark:bg-gray-800/50">
         <MessageInput />
       </div>
     </div>

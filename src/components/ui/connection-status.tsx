@@ -1,28 +1,48 @@
-import { motion } from 'framer-motion';
-import { Wifi, WifiOff } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Wifi, WifiOff, Loader2 } from 'lucide-react';
 import { useChatStore } from '@/stores/chatStore';
-import { cn } from '@/lib/utils';
 
 export function ConnectionStatus() {
   const { isConnected } = useChatStore();
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      className={cn(
-        "flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium",
-        isConnected
-          ? "bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-400"
-          : "bg-red-100 text-red-700 dark:bg-red-900/20 dark:text-red-400"
-      )}
-    >
-      {isConnected ? (
-        <Wifi className="h-3 w-3" />
-      ) : (
-        <WifiOff className="h-3 w-3" />
-      )}
-      <span>{isConnected ? 'Connected' : 'Disconnected'}</span>
-    </motion.div>
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8, y: -20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.8, y: -20 }}
+        transition={{ duration: 0.3 }}
+        className={`
+          flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium shadow-lg backdrop-blur-xl border
+          ${isConnected 
+            ? 'bg-green-500/20 text-green-700 dark:text-green-300 border-green-500/30' 
+            : 'bg-red-500/20 text-red-700 dark:text-red-300 border-red-500/30'
+          }
+        `}
+      >
+        <motion.div
+          animate={isConnected ? {} : { rotate: 360 }}
+          transition={{ duration: 2, repeat: isConnected ? 0 : Infinity, ease: "linear" }}
+        >
+          {isConnected ? (
+            <Wifi className="w-4 h-4" />
+          ) : (
+            <WifiOff className="w-4 h-4" />
+          )}
+        </motion.div>
+        
+        <span className="hidden sm:inline">
+          {isConnected ? 'Connected' : 'Connecting...'}
+        </span>
+
+        {isConnected && (
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            className="w-2 h-2 bg-green-500 rounded-full"
+          />
+        )}
+      </motion.div>
+    </AnimatePresence>
   );
 }

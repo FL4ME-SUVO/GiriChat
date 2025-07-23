@@ -38,13 +38,13 @@ export function Sidebar() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'online':
-        return 'bg-status-online';
+        return 'bg-green-500';
       case 'away':
-        return 'bg-status-away';
+        return 'bg-yellow-500';
       case 'busy':
-        return 'bg-status-busy';
+        return 'bg-red-500';
       default:
-        return 'bg-status-offline';
+        return 'bg-gray-400';
     }
   };
 
@@ -53,9 +53,9 @@ export function Sidebar() {
   );
 
   return (
-    <div className="flex flex-col h-full bg-sidebar">
+    <div className="flex flex-col h-full relative">
       {/* Header */}
-      <div className="p-4 border-b border-sidebar-border">
+      <div className="p-4 border-b border-gray-200/20 dark:border-gray-700/20 backdrop-blur-sm">
         <div className="flex items-center gap-3">
           <Button
             variant="ghost"
@@ -74,8 +74,8 @@ export function Sidebar() {
                 exit={{ opacity: 0, width: 0 }}
                 className="flex items-center gap-2 min-w-0"
               >
-                <h1 className="font-bold text-lg text-sidebar-foreground truncate">
-                  ChatterVerse
+                <h1 className="font-bold text-lg bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent truncate">
+                  GiriChat
                 </h1>
               </motion.div>
             )}
@@ -92,12 +92,12 @@ export function Sidebar() {
               className="mt-4"
             >
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-sidebar-foreground/60" />
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500 dark:text-gray-400" />
                 <Input
                   placeholder="Search channels..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-9 bg-sidebar-accent border-sidebar-border focus:ring-sidebar-ring"
+                  className="pl-9 bg-gray-100/50 dark:bg-gray-800/50 border-gray-200/50 dark:border-gray-700/50 focus:ring-blue-500 backdrop-blur-sm"
                 />
               </div>
             </motion.div>
@@ -116,7 +116,7 @@ export function Sidebar() {
               className="p-2"
             >
               <div className="flex items-center justify-between px-2 py-1 mb-2">
-                <span className="text-xs font-semibold text-sidebar-foreground/80 uppercase tracking-wider">
+                <span className="text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
                   Channels
                 </span>
                 <Button
@@ -144,10 +144,10 @@ export function Sidebar() {
                 whileTap={{ scale: 0.98 }}
                 onClick={() => setActiveChannel(channel.id)}
                 className={cn(
-                  "flex items-center gap-3 w-full p-2 rounded-lg transition-colors text-left",
+                  "flex items-center gap-3 w-full p-2 rounded-lg transition-all duration-200 text-left backdrop-blur-sm",
                   isActive
-                    ? "bg-sidebar-accent text-sidebar-primary"
-                    : "text-sidebar-foreground/80 hover:bg-sidebar-accent/50 hover:text-sidebar-foreground"
+                    ? "bg-blue-500/20 text-blue-700 dark:text-blue-300 border border-blue-500/30 shadow-lg"
+                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-200/50 dark:hover:bg-gray-700/50 hover:scale-[1.02]"
                 )}
               >
                 {channel.type === 'dm' && channel.avatar ? (
@@ -159,7 +159,7 @@ export function Sidebar() {
                       </AvatarFallback>
                     </Avatar>
                     <div className={cn(
-                      "absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-sidebar",
+                      "absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-white dark:border-gray-800",
                       getStatusColor('online')
                     )} />
                   </div>
@@ -193,19 +193,19 @@ export function Sidebar() {
       </div>
 
       {/* User Profile & Settings */}
-      <div className="p-4 border-t border-sidebar-border">
+      <div className="p-4 border-t border-gray-200/20 dark:border-gray-700/20 backdrop-blur-sm">
         <div className="flex items-center gap-3">
           {currentUser && (
             <>
               <div className="relative">
-                <Avatar className="h-8 w-8">
+                <Avatar className="h-8 w-8 ring-2 ring-blue-500/20">
                   <AvatarImage src={currentUser.avatar} />
-                  <AvatarFallback>
+                  <AvatarFallback className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
                     {currentUser.username.split(' ').map(n => n[0]).join('')}
                   </AvatarFallback>
                 </Avatar>
                 <div className={cn(
-                  "absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-sidebar",
+                  "absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-white dark:border-gray-800",
                   getStatusColor(currentUser.status)
                 )} />
               </div>
@@ -218,10 +218,10 @@ export function Sidebar() {
                     exit={{ opacity: 0, width: 0 }}
                     className="flex-1 min-w-0"
                   >
-                    <div className="text-sm font-medium text-sidebar-foreground truncate">
+                    <div className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
                       {currentUser.username}
                     </div>
-                    <div className="text-xs text-sidebar-foreground/60 capitalize">
+                    <div className="text-xs text-gray-600 dark:text-gray-400 capitalize">
                       {currentUser.status}
                     </div>
                   </motion.div>
